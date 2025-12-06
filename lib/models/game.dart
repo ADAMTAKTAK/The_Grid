@@ -4,11 +4,14 @@ class Game {
   final String? backgroundImage;
   final double rating;
   
+  String? heroId;
+
   Game({
     required this.id,
     required this.name,
     this.backgroundImage,
     required this.rating,
+    this.heroId,
   });
 
   String get fullBackgroundImage {

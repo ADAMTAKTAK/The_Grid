@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_grid/providers/games_provider.dart';
+import 'package:the_grid/widgets/widgets.dart';
+import 'package:the_grid/themes/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,21 +13,33 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('The Grid - Core System'),
-      ),
-      body: gamesProvider.onDisplayGames.isEmpty 
-        ? const Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: gamesProvider.onDisplayGames.length,
-            itemBuilder: (context, index) {
-              final game = gamesProvider.onDisplayGames[index];
-              return ListTile(
-                leading: Image.network(game.fullBackgroundImage, width: 50, fit: BoxFit.cover),
-                title: Text(game.name),
-                subtitle: Text('Rating: ${game.rating}'),
-              );
-            },
+        title: const Text('THE GRID'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search_rounded, color: AppTheme.primary),
+            onPressed: () {}, 
           ),
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: AppTheme.primary),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CardSwiper(games: gamesProvider.onDisplayGames),
+
+            GameSlider(
+              games: gamesProvider.popularGames,
+              title: 'POPULAR',
+              onNextPage: () => gamesProvider.getPopularGames(),
+            ),
+          
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
     );
   }
 }

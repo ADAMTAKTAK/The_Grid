@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_grid/providers/games_provider.dart';
 import 'package:the_grid/screens/home_screen.dart';
+import 'package:the_grid/themes/app_theme.dart';
 
 void main() => runApp(const AppState());
 
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'The Grid',
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      theme: AppTheme.darkTheme,
     );
   }
 }

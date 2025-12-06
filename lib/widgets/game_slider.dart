@@ -93,7 +93,7 @@ class _GamePoster extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, 'details', arguments: game),
             child: Hero(
               tag: game.heroId!,
               child: ClipRRect(
@@ -106,8 +106,11 @@ class _GamePoster extends StatelessWidget {
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return const SizedBox(
-                      width: 130, height: 190,
-                      child: Center(child: CircularProgressIndicator(color: AppTheme.primary)),
+                      width: 130,
+                      height: 190,
+                      child: Center(
+                        child: CircularProgressIndicator(color: AppTheme.primary),
+                      ),
                     );
                   },
                 ),

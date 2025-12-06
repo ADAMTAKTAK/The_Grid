@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_grid/models/models.dart';
@@ -10,6 +11,8 @@ class GamesProvider extends ChangeNotifier {
   List<Game> onDisplayGames = [];
   List<Game> popularGames = [];
   
+  int _popularPage = 0;
+
   GamesProvider() {
     getOnDisplayGames();
     getPopularGames();
@@ -29,14 +32,40 @@ class GamesProvider extends ChangeNotifier {
   Future<void> getOnDisplayGames() async {
     final jsonData = await _getJsonData('/api/games');
     final gameResponse = GameResponse.fromJson(jsonData);
-    onDisplayGames = gameResponse.results;
+    
+    onDisplayGames = gameResponse.results
+        .where((game) => game.backgroundImage != null)
+        .toList();
+        
     notifyListeners();
   }
 
   Future<void> getPopularGames() async {
-    final jsonData = await _getJsonData('/api/games', 2);
+    _popularPage++;
+    
+    final jsonData = await _getJsonData('/api/games', _popularPage);
     final gameResponse = GameResponse.fromJson(jsonData);
-    popularGames = gameResponse.results;
+
+    popularGames = [...popularGames, ...gameResponse.results];
     notifyListeners();
+  }
+
+  Future<Game> getGameDetails(int id) async {
+    final jsonData = await _getJsonData('/api/games/$id');
+    return Game.fromJson(json.decode(jsonData));
+  }
+
+  Future<List<Game>> searchGames(String query) async {
+    final url = Uri.https(_baseUrl, '/api/games', {
+      'key': _apiKey,
+      'search': query,
+    });
+
+    final response = await http.get(url);
+    final gameResponse = GameResponse.fromJson(response.body);
+    
+    return gameResponse.results
+        .where((game) => game.backgroundImage != null)
+        .toList();
   }
 }

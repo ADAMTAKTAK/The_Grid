@@ -11,6 +11,7 @@ class CardSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isLandscape = size.width > size.height;
 
     if (games.isEmpty) {
       return SizedBox(
@@ -20,21 +21,24 @@ class CardSwiper extends StatelessWidget {
       );
     }
 
+    final swiperHeight = isLandscape ? size.height * 0.6 : size.height * 0.5;
+    final cardWidth = swiperHeight * 0.7; 
+
     return Container(
       width: double.infinity,
-      height: size.height * 0.5,
+      height: swiperHeight,
       padding: const EdgeInsets.only(top: 10),
       child: Swiper(
         itemCount: games.length,
         layout: SwiperLayout.STACK,
-        itemWidth: size.width * 0.6,
-        itemHeight: size.height * 0.4,
+        itemWidth: cardWidth,
+        itemHeight: swiperHeight * 0.9,
         itemBuilder: (context, index) {
           final game = games[index];
           game.heroId = 'swiper-${game.id}'; 
 
           return GestureDetector(
-            onTap: () {}, 
+            onTap: () => Navigator.pushNamed(context, 'details', arguments: game),
             child: Hero(
               tag: game.heroId!,
               child: Container(

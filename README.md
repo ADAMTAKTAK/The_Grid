@@ -1,16 +1,20 @@
-# the_grid
+# The Grid 🌐
 
-A new Flutter project.
+## Acceso a la Dimensión Digital
 
-## Getting Started
+**The Grid** es más que una aplicación; es tu catálogo definitivo de videojuegos diseñado para navegar por la frontera digital. Explora, organiza y visualiza tu colección a través de una interfaz inmersiva y futurista.
 
-This project is a starting point for a Flutter application.
+## 💾 Arquitectura del Sistema
 
-A few resources to get you started if this is your first Flutter project:
+Este programa ha sido desarrollado por **ENCOM**, comprometidos con la creación de software avanzado para los usuarios.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 👨‍💻 Núcleo de Desarrollo (ENCOM Team)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Conecta con los arquitectos detrás del código:
+
+* **Pablo Guevara** -https://github.com/PabloGuevara03
+* **Adam Taktak** - https://github.com/ADAMTAKTAK
+
+---
+> *""We kept dreaming of a world We thought we'd never see, and then one day we got In""*
+> 
